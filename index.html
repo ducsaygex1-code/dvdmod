@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> - Nền Tảng Mod Game #1 Việt Nam</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0d1428 100%);
+            min-height: 100vh;
+        }
+
+        /* Animated Background Stars */
+        .stars {
+            position: fixed;
+            width: 100%;
+            height:  100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            width:  2px;
+            height:  2px;
+            background:  white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            border-bottom: 2px solid;
+            border-image: linear-gradient(90deg, #00d4ff, #ff006e, #00d4ff) 1;
+            box-shadow: 0 8px 32px rgba(0, 212, 255, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight:  900;
+            background: linear-gradient(135deg, #00d4ff, #ff006e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            white-space: nowrap;
+            animation: glow 2s ease-in-out infinite;
+            cursor: pointer;
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: drop-shadow(0 0 5px rgba(0, 212, 255, 0.5)); }
+            50% { filter:  drop-shadow(0 0 20px rgba(0, 212, 255, 0.8)); }
+        }
+
+        nav ul {
+            list-style:  none;
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 0.5rem 1rem;
+            border-radius:  5px;
+            transition: all 0.3s ease;
+            position: relative;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom:  0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00d4ff, #ff006e);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: #00d4ff;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+        }
+
+        .search-box {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .search-box input {
+            padding: 0.6rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid #00d4ff;
+            border-radius: 20px;
+            color: #e0e0e0;
+            font-size: 0.9rem;
+            width: 180px;
+            transition: all 0.3s ease;
+        }
+
+        .search-box input::placeholder {
+            color: #888;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            background: rgba(0, 212, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+            width: 220px;
+        }
+
+        .search-box button {
+            padding: 0.6rem 1.2rem;
+            background: linear-gradient(135deg, #00d4ff, #ff006e);
+            border: none;
+            border-radius: 20px;
+            color: white;
+            font-weight: 600;
+            cursor:  pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-box button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left:  0;
+            width: 100%;
+            height:  100%;
+            background: radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(255, 0, 110, 0.1) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 800px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #00d4ff, #ff006e, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: slideInDown 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #00d4ff;
+            margin-bottom: 2rem;
+            animation: slideInUp 1s ease 0.2s both;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: slideInUp 1s ease 0.4s both;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            color: white;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow:  0 10px 30px rgba(0, 212, 255, 0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #ff006e;
+            border: 2px solid #ff006e;
+            box-shadow: 0 0 20px rgba(255, 0, 110, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 0, 110, 0.1);
+            box-shadow: 0 0 30px rgba(255, 0, 110, 0.5);
+            transform: translateY(-3px);
+        }
+
+        /* Section */
+        section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 2rem;
+            position: relative;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align:  center;
+            background: linear-gradient(135deg, #00d4ff, #ff006e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+            animation: slideInDown 1s ease;
+        }
+
+        /* Mods Grid */
+        .mods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .mod-card {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), rgba(255, 0, 110, 0.05));
+            border:  2px solid rgba(0, 212, 255, 0.2);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+            animation: flipIn 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        .mod-card:nth-child(1) { animation-delay: 0.1s; }
+        .mod-card:nth-child(2) { animation-delay: 0.2s; }
+        .mod-card:nth-child(3) { animation-delay: 0.3s; }
+        .mod-card:nth-child(4) { animation-delay: 0.4s; }
+        .mod-card:nth-child(5) { animation-delay: 0.5s; }
+        .mod-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .mod-card:hover {
+            transform: translateY(-15px);
+            border-color: #00d4ff;
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.3), 0 0 30px rgba(0, 212, 255, 0.2);
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(255, 0, 110, 0.15));
+        }
+
+        .mod-thumbnail {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, #00d4ff, #ff006e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mod-thumbnail:after {
+            content: '';
+            position: absolute;
+            top:  0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: translateX(-100%);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: translateX(-100%); }
+            50% { transform: translateX(100%); }
+        }
+
+        .mod-info {
+            padding: 1.5rem;
+        }
+
+        .mod-title {
+            font-size: 1.2rem;
+            font-weight:  700;
+            margin-bottom: 0.5rem;
+            color: #00d4ff;
+        }
+
+        .mod-author {
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 1rem;
+        }
+
+        .mod-description {
+            font-size: 0.9rem;
+            color: #b0b0b0;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        /* Mod Stats */
+        .mod-stats {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+            font-size: 0.85rem;
+            background: linear-gradient(90deg, rgba(0, 212, 255, 0.1), rgba(255, 0, 110, 0.1));
+            padding: 0.8rem;
+            border-radius: 8px;
+            border-left: 3px solid #00d4ff;
+        }
+
+        .mod-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: #00d4ff;
+            font-weight: 600;
+            flex:  1;
+        }
+
+        /* Mod Tags */
+        .mod-tags {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap:  wrap;
+            margin-bottom: 1.2rem;
+        }
+
+        .tag {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.3), rgba(0, 212, 255, 0.1));
+            color: #00d4ff;
+            padding: 0.4rem 1rem;
+            border-radius:  20px;
+            font-size: 0.75rem;
+            font-weight:  700;
+            border: 1.5px solid #00d4ff;
+            transition: all 0.3s ease;
+            cursor: default;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+        }
+
+        .tag:hover {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.5), rgba(0, 212, 255, 0.3));
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+            transform: scale(1.05);
+        }
+
+        /* Link Input Container */
+        .mod-link-container {
+            position: relative;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            border-radius: 10px;
+            background: linear-gradient(90deg, 
+                rgba(0, 212, 255, 0.15) 0%,
+                rgba(255, 0, 110, 0.15) 50%,
+                rgba(0, 212, 255, 0.15) 100%);
+            background-size: 200% 100%;
+            animation: gradientShift 3s ease infinite;
+            padding: 2px;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position:  0% 0%; }
+            50% { background-position: 100% 0%; }
+        }
+
+        .mod-link-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left:  0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #00d4ff, #ff006e, #00d4ff);
+            animation: shimmerBorder 2s ease infinite;
+        }
+
+        @keyframes shimmerBorder {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .mod-link-input {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            background: rgba(10, 14, 39, 0.8);
+            border: none;
+            border-radius: 8px;
+            color: #00d4ff;
+            font-size: 0.82rem;
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            caret-color: #ff006e;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+        }
+
+        .mod-link-input::placeholder {
+            color: #555;
+        }
+
+        .mod-link-input:focus {
+            outline: none;
+            background: rgba(0, 212, 255, 0.2);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.5) inset,
+                        0 0 20px rgba(0, 212, 255, 0.3);
+            text-shadow: 0 0 15px rgba(0, 212, 255, 0.8);
+        }
+
+        /* Copy Button */
+        .copy-btn {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            border: none;
+            color: white;
+            padding: 0.5rem 0.9rem;
+            border-radius:  6px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            font-weight:  700;
+            z-index: 2;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: pulse 2s ease-in-out infinite;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+        }
+
+        .mod-link-container:hover .copy-btn {
+            opacity: 1;
+        }
+
+        .copy-btn:hover {
+            transform: translateY(-50%) scale(1.12);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.8);
+            background: linear-gradient(135deg, #00d4ff, #ff006e);
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 5px rgba(0, 212, 255, 0.4); }
+            50% { box-shadow: 0 0 15px rgba(0, 212, 255, 0.7); }
+        }
+
+        /* Download Button */
+        .mod-download {
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            color: white;
+            border: none;
+            padding: 0.9rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 800;
+            cursor: pointer;
+            width: 100%;
+            transition:  all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1. 2px;
+            font-size: 0.9rem;
+            box-shadow:  0 4px 15px rgba(0, 212, 255, 0.3);
+        }
+
+        .mod-download::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left:  -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .mod-download:hover::before {
+            left: 100%;
+        }
+
+        .mod-download:hover {
+            transform: scale(1.06) translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.6),
+                        0 0 30px rgba(0, 212, 255, 0.4);
+        }
+
+        /* Trending Badge */
+        .trending-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: linear-gradient(135deg, #ff006e, #ff4d7d);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight:  700;
+            animation: pulse 2s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        /* Creator Card */
+        .creator-card {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), rgba(255, 0, 110, 0.05));
+            border:  2px solid rgba(0, 212, 255, 0.2);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+            animation: flipIn 0.6s ease forwards;
+            opacity: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .creator-card:nth-child(1) { animation-delay: 0.1s; }
+        .creator-card:nth-child(2) { animation-delay: 0.2s; }
+        .creator-card:nth-child(3) { animation-delay: 0.3s; }
+
+        .creator-card:hover {
+            transform: translateY(-15px);
+            border-color:  #00d4ff;
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.3), 0 0 30px rgba(0, 212, 255, 0.2);
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(255, 0, 110, 0.15));
+        }
+
+        /* Creator Thumbnail */
+        .creator-thumbnail {
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(135deg, #ff6b9d, #c44569);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3. 5rem;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .creator-thumbnail::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left:  0;
+            width: 100%;
+            height:  100%;
+            background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: translateX(-100%);
+            animation: shimmer 2s infinite;
+        }
+
+        .creator-thumbnail:hover {
+            background: linear-gradient(135deg, #ff4d7d, #e63a5f);
+            transform: scale(1.05);
+        }
+
+        .creator-thumbnail.gameplay {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .creator-thumbnail.gameplay:hover {
+            background: linear-gradient(135deg, #7a8eef, #8560b8);
+        }
+
+        .creator-thumbnail.map {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+        }
+
+        .creator-thumbnail.map:hover {
+            background: linear-gradient(135deg, #f0a5fc, #f67080);
+        }
+
+        /* Creator Info */
+        .creator-info {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .creator-name {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #00d4ff;
+            margin-bottom: 0.3rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .creator-role {
+            font-size: 0.8rem;
+            color: #ff006e;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .creator-description {
+            font-size: 0.9rem;
+            color: #b0b0b0;
+            margin-bottom: 1.2rem;
+            line-height:  1.5;
+            flex-grow: 1;
+        }
+
+        /* Creator Stats */
+        .creator-stats {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+            font-size: 0.85rem;
+            background: linear-gradient(90deg, rgba(0, 212, 255, 0.1), rgba(255, 0, 110, 0.1));
+            padding: 0.8rem;
+            border-radius:  8px;
+            border-left: 3px solid #00d4ff;
+        }
+
+        .creator-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: #00d4ff;
+            font-weight: 700;
+            flex: 1;
+        }
+
+        /* Creator Button */
+        .creator-btn {
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            color: white;
+            border: 2px solid #00d4ff;
+            padding: 0.9rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 800;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+        }
+
+        .creator-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .creator-btn:hover::before {
+            left: 100%;
+        }
+
+        .creator-btn:hover {
+            transform: scale(1.06) translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.6),
+                        0 0 30px rgba(0, 212, 255, 0.4);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform:  translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform:  translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform:  translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform:  translateY(0);
+            }
+        }
+
+        @keyframes flipIn {
+            from {
+                opacity: 0;
+                transform:  rotateY(90deg);
+            }
+            to {
+                opacity: 1;
+                transform: rotateY(0);
+            }
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(10, 14, 39, 0.9));
+            border-top: 2px solid;
+            border-image: linear-gradient(90deg, #00d4ff, #ff006e) 1;
+            color: #b0b0b0;
+            padding: 3rem 2rem 1rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            color: #00d4ff;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section a {
+            color: #b0b0b0;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .footer-section a:hover {
+            color: #00d4ff;
+            margin-left: 5px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(0, 212, 255, 0.2);
+            padding-top: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width:  768px) {
+            nav {
+                padding: 0.8rem 1rem;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                flex-direction:  column;
+                gap: 0.5rem;
+                text-align: center;
+            }
+
+            .search-box {
+                width: 100%;
+                flex-direction: column;
+            }
+
+            .search-box input {
+                width: 100%;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero {
+                margin-top: 200px;
+                min-height: auto;
+                padding: 2rem 1rem;
+            }
+
+            section h2 {
+                font-size: 1.8rem;
+            }
+
+            .mods-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .copy-btn {
+                opacity: 1 !important;
+            }
+
+            .mod-stats {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .mod-stat {
+                flex:  auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo" onclick="scrollToSection('home')">⚡ SigMaMod</div>
+            <ul>
+                <li><a onclick="scrollToSection('home')">🏠 Trang Chủ</a></li>
+                <li><a onclick="scrollToSection('mods')">🔥 Mod Game</a></li>
+                <li><a onclick="scrollToSection('community')">👥 Creators</a></li>
+                <li><a onclick="scrollToSection('footer')">📞 Liên Hệ</a></li>
+            </ul>
+            <div class="search-box">
+                <input type="text" placeholder="Tìm mod...">
+                <button>🔍</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>SigMaMod</h1>
+            <p>🚀 Mod free ngại gì không </p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="scrollToSection('mods')">
+                    ⚡ Khám Phá Mod
+                </button>
+                <button class="btn btn-secondary" onclick="scrollToSection('community')">
+                    👥 Xem Creators
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mods Section -->
+    <section id="mods">
+        <h2>🔥 Mod Trending Hôm Nay</h2>
+        <div class="mods-grid">
+            <!-- Mod 1 -->
+            <div class="mod-card">
+                <div class="trending-badge">🔥 HOT</div>
+                <div class="mod-thumbnail">🎨</div>
+                <div class="mod-info">
+                    <div class="mod-title">ModSkin Pack</div>
+                    <div class="mod-author">👤 By:SocolaSigMa</div>
+                    <div class="mod-description">Mod texture chân thực nhất cho game, độ phân giải 4K siêu đẹp</div>
+                    <div class="mod-stats">
+                        <div class="mod-stat">⬇️ 45. 2K</div>
+                        <div class="mod-stat">⭐ 4.8</div>
+                        <div class="mod-stat">💬 1.2K</div>
+                    </div>
+                    <div class="mod-tags">
+                        <span class="tag">Texture</span>
+                        <span class="tag">4K</span>
+                        <span class="tag">Realistic</span>
+                    </div>
+                    <div class="mod-link-container">
+                        <input type="text" class="mod-link-input" placeholder="Gắn link mod..." value="https://link4m.com/go/R0apoaB">
+                        <button class="copy-btn" onclick="copyLink(this)">📋 Copy</button>
+                    </div>
+                    <button class="mod-download" onclick="downloadMod(this)">⬇️ Download </button>
+                </div>
+            </div>
+
+            <!-- Mod 2 -->
+            <div class="mod-card">
+                <div class="trending-badge">⭐ NEW</div>
+                <div class="mod-thumbnail">💪</div>
+                <div class="mod-info">
+                    <div class="mod-title">ModSkin Pack</div>
+                    <div class="mod-author">👤 By:SigMaSocola</div>
+                    <div class="mod-description">ModSkin</div>
+                    <div class="mod-stats">
+                        <div class="mod-stat">⬇️ 32.5K</div>
+                        <div class="mod-stat">⭐ 4.9</div>
+                        <div class="mod-stat">💬 2.1K</div>
+                    </div>
+                    <div class="mod-tags">
+                        <span class="tag">Gameplay</span>
+                        <span class="tag">Combat</span>
+                        <span class="tag">Action</span>
+                    </div>
+                    <div class="mod-link-container">
+                        <input type="text" class="mod-link-input" placeholder="Gắn link mod..." value="https://link4m.com/go/R0apoaB">
+                        <button class="copy-btn" onclick="copyLink(this)">📋 Copy</button>
+                    </div>
+                    <button class="mod-download" onclick="downloadMod(this)">⬇️ Download </button>
+                </div>
+            </div>
+
+            <!-- Mod 3 -->
+            <div class="mod-card">
+                <div class="trending-badge">🔥 HOT</div>
+                <div class="mod-thumbnail">🌍</div>
+                <div class="mod-info">
+                    <div class="mod-title">ModSkin Pack</div>
+                    <div class="mod-author">👤 By:SigmaSocola</div>
+                    <div class="mod-description">ModSkin</div>
+                    <div class="mod-stats">
+                        <div class="mod-stat">⬇️ 38.9K</div>
+                        <div class="mod-stat">⭐ 4.7</div>
+                        <div class="mod-stat">💬 985</div>
+                    </div>
+                    <div class="mod-tags">
+                        <span class="tag">Map</span>
+                        <span class="tag">Exploration</span>
+                        <span class="tag">Fantasy</span>
+                    </div>
+                    <div class="mod-link-container">
+                        <input type="text" class="mod-link-input" placeholder="Gắn link mod..." value="https://link4m.com/go/R0apoaB">
+                        <button class="copy-btn" onclick="copyLink(this)">📋 Copy</button>
+                    </div>
+                    <button class="mod-download" onclick="downloadMod(this)">⬇️ Download </button>
+                </div>
+            </div>
+
+            <!-- Mod 4 -->
+            <div class="mod-card">
+                <div class="mod-thumbnail">🎵</div>
+                <div class="mod-info">
+                    <div class="mod-title">ModSkin Pack</div>
+                    <div class="mod-author">👤 By:SigMaSocola</div>
+                    <div class="mod-description">Vẫn là ModSkin</div>
+                    <div class="mod-stats">
+                        <div class="mod-stat">⬇️ 28.3K</div>
+                        <div class="mod-stat">⭐ 4.6</div>
+                        <div class="mod-stat">💬 542</div>
+                    </div>
+                    <div class="mod-tags">
+                        <span class="tag">Audio</span>
+                        <span class="tag">Music</span>
+                        <span class="tag">Orchestra</span>
+                    </div>
+                    <div class="mod-link-container">
+                        <input type="text" class="mod-link-input" placeholder="Gắn link mod..." value="https://link4m.com/go/R0apoaB">
+                        <button class="copy-btn" onclick="copyLink(this)">📋 Copy</button>
+                    </div>
+                    <button class="mod-download" onclick="downloadMod(this)">⬇️ Download </button>
+                </div>
+            </div>
+
+            <!-- Mod 5 -->
+            <div class="mod-card">
+                <div class="mod-thumbnail">⚙️</div>
+                <div class="mod-info">
+                    <div class="mod-title">ModSkin Pack</div>
+                    <div class="mod-author">👤 By:SigmaSocola</div>
+                    <div class="mod-description">ModSKin</div>
+                    <div class="mod-stats">
+                        <div class="mod-stat">⬇️ 52.1K</div>
+                        <div class="mod-stat">⭐ 4.8</div>
+                        <div class="mod-stat">💬 3. 2K</div>
+                    </div>
+                    <div class="mod-tags">
+                        <span class="tag">Performance</span>
+                        <span class="tag">FPS</span>
+                        <span class="tag">Optimization</span>
+                    </div>
+                    <div class="mod-link-container">
+                        <input type="text" class="mod-link-input" placeholder="Gắn link mod..." value="https://link4m.com/go/R0apoaB">
+                        <button class="copy-btn" onclick="copyLink(this)">📋 Copy</button>
+                    </div>
+                    <button class="mod-download" onclick="downloadMod(this)">⬇️ Download </button>
+                </div>
+            </div>
+
+            <!-- Mod 6 -->
+            <div class="mod-card">
+                <div class="trending-badge">😂 FUN</div>
+                <div class="mod-thumbnail">🔥</div>
+                <div class="mod-info">
+                    <div class="mod-title">ModSkin Pack</div>
+                    <div class="mod-author">👤 By:SigMaSocola</div>
+                    <div class="mod-description">ModSkin</div>
+                    <div class="mod-stats">
+                        <div class="mod-stat">⬇️ 41.7K</div>
+                        <div class="mod-stat">⭐ 4.5</div>
+                        <div class="mod-stat">💬 1.8K</div>
+                    </div>
+                    <div class="mod-tags">
+                        <span class="tag">Funny</span>
+                        <span class="tag">Animation</span>
+                        <span class="tag">Comedy</span>
+                    </div>
+                    <div class="mod-link-container">
+                        <input type="text" class="mod-link-input" placeholder="Gắn link mod..." value="https://link4m.com/go/R0apoaB">
+                        <button class="copy-btn" onclick="copyLink(this)">📋 Copy</button>
+                    </div>
+                    <button class="mod-download" onclick="downloadMod(this)">⬇️ Download </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section id="community">
+        <h2>👥 Cộng Đồng Tạo Mod Hàng Đầu</h2>
+        <div class="mods-grid">
+            <!-- Creator 1 -->
+            <div class="creator-card">
+                <div class="creator-thumbnail" onclick="redirectTo('https://www.tiktok.com/@socolasigma1?_r=1&_t=ZS-92unE8yKOR8')">
+                    👨‍💻
+                </div>
+                <div class="creator-info">
+                    <div class="creator-name">@SigmaSocola</div>
+                    <div class="creator-role">Nhà Tạo Mod Hạng A</div>
+                    <div class="creator-description">
+                        Mod skin Liên quân cực khét
+                    </div>
+                    <div class="creator-stats">
+                        <div class="creator-stat">👥 5.2K</div>
+                        <div class="creator-stat">💎 12</div>
+                    </div>
+                    <button class="creator-btn" onclick="redirectTo('https://www.tiktok.com/@socolasigma1?_r=1&_t=ZS-92unE8yKOR8')">
+                        🔗 Thăm Trang
+                    </button>
+                </div>
+            </div>
+
+            <!-- Creator 2 -->
+            <div class="creator-card">
+                <div class="creator-thumbnail gameplay" onclick="redirectTo('https://www.tiktok.com/@socolasigma1?_r=1&_t=ZS-92unE8yKOR8')">
+                    🎮
+                </div>
+                <div class="creator-info">
+                    <div class="creator-name">@SigMaSocola</div>
+                    <div class="creator-role">Nhà Phát Triển Gameplay</div>
+                    <div class="creator-description">
+                       Mod skin Liên quân cực khét
+                    </div>
+                    <div class="creator-stats">
+                        <div class="creator-stat">👥 3.8K</div>
+                        <div class="creator-stat">💎 8</div>
+                    </div>
+                    <button class="creator-btn" onclick="redirectTo('https://www.tiktok.com/@socolasigma1?_r=1&_t=ZS-92unE8yKOR8')">
+                        🔗 Thăm Trang
+                    </button>
+                </div>
+            </div>
+
+            <!-- Creator 3 -->
+            <div class="creator-card">
+                <div class="creator-thumbnail map" onclick="redirectTo('https://www.tiktok.com/@socolasigma1?_r=1&_t=ZS-92unE8yKOR8')">
+                    🗺️
+                </div>
+                <div class="creator-info">
+                    <div class="creator-name">@Sigma</div>
+                    <div class="creator-role">Nghệ Sĩ Thiết Kế Bản Đồ</div>
+                    <div class="creator-description">
+                        Mod skin Liên quân cực khét
+                    </div>
+                    <div class="creator-stats">
+                        <div class="creator-stat">👥 2.1K</div>
+                        <div class="creator-stat">💎 15</div>
+                    </div>
+                    <button class="creator-btn" onclick="redirectTo('https://www.tiktok.com/@socolasigma1?_r=1&_t=ZS-92unE8yKOR8')">
+                        🔗 Thăm Trang
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>⚡ SevSigma</h4>
+                <p>Nhớ folow tiktok để nhận thêm nhiều mod nhá nhá</p>
+            </div>
+            <div class="footer-section">
+                <h4>Mạng Xã Hội</h4>
+                <a onclick="redirectTo('https://www.tiktok.com/modverse')">🎵 TikTok</a>
+                <a onclick="redirectTo('https://www.youtube.com/modverse')">📺 YouTube</a>
+                <a onclick="redirectTo('https://www.instagram.com/modverse')">📸 Instagram</a>
+                <a onclick="redirectTo('https://discord.com/invite/modverse')">🎮 Discord</a>
+            </div>
+            <div class="footer-section">
+                <h4>Liên Kết</h4>
+                <a onclick="redirectTo('https://www.facebook.com/modverse')">📱 Facebook</a>
+                <a onclick="redirectTo('https://www.twitch.tv/modverse')">📡 Twitch</a>
+                <a onclick="redirectTo('https://twitter.com/modverse')">𝕏 Twitter</a>
+                <a onclick="redirectTo('https://www.reddit.com/r/modverse')">🔴 Reddit</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026  - Kết Nối Game Thủ Với Creators</p>
+        </div>
+    </footer>
+
+    <script>
+        // Tạo sao nhấp nháy
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style. left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        createStars();
+
+        // Smooth scroll to section
+        function scrollToSection(sectionId) {
+            const element = document. getElementById(sectionId);
+            if (element) {
+                element. scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Redirect to external URL (opens new tab)
+        function redirectTo(url) {
+            if (url && (url.startsWith('http://') || url.startsWith('https://'))) {
+                window.open(url, '_blank');
+                console.log(`✅ Chuyển hướng tới: ${url}`);
+            } else {
+                alert('❌ URL không hợp lệ! ');
+            }
+        }
+
+        // Navigate to internal page (change entire page)
+        function navigateTo(url) {
+            window.location.href = url;
+        }
+
+        // Copy Link
+        function copyLink(btn) {
+            const container = btn.parentElement;
+            const input = container.querySelector('. mod-link-input');
+            const link = input.value;
+            
+            if (link) {
+                navigator. clipboard.writeText(link).then(() => {
+                    const originalText = btn.textContent;
+                    btn.textContent = '✅ Đã Copy! ';
+                    btn.style.background = 'linear-gradient(135deg, #00d4ff, #0099cc)';
+                    
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                        btn.style. background = '';
+                    }, 2000);
+                });
+            }
+        }
+
+        // Download mod với link
+        function downloadMod(btn) {
+            const card = btn.closest('.mod-card');
+            const container = card.querySelector('.mod-link-container');
+            const linkInput = container.querySelector('.mod-link-input');
+            const link = linkInput.value;
+            
+            if (link && link.includes('http')) {
+                window.open(link, '_blank');
+            } else {
+                alert('❌ Link không hợp lệ.  Vui lòng kiểm tra đường dẫn! ');
+            }
+        }
+    </script>
+</body>
+</html>
